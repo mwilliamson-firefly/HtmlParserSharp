@@ -1,36 +1,36 @@
 ﻿/*
  * Copyright (c) 2007 Henri Sivonen
  * Copyright (c) 2007-2011 Mozilla Foundation
- * Portions of comments Copyright 2004-2008 Apple Computer, Inc., Mozilla 
+ * Portions of comments Copyright 2004-2008 Apple Computer, Inc., Mozilla
  * Foundation, and Opera Software ASA.
  * Copyright (c) 2012 Patrick Reisert
  *
- * Permission is hereby granted, free of charge, to any person obtaining a 
- * copy of this software and associated documentation files (the "Software"), 
- * to deal in the Software without restriction, including without limitation 
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, 
- * and/or sell copies of the Software, and to permit persons to whom the 
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in 
+ * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
 
 /*
- * The comments following this one that use the same comment syntax as this 
- * comment are quotes from the WHATWG HTML 5 spec as of 27 June 2007 
+ * The comments following this one that use the same comment syntax as this
+ * comment are quotes from the WHATWG HTML 5 spec as of 27 June 2007
  * amended as of June 28 2007.
  * That document came with this statement:
- * © Copyright 2004-2007 Apple Computer, Inc., Mozilla Foundation, and 
- * Opera Software ASA. You are granted a license to use, reproduce and 
+ * © Copyright 2004-2007 Apple Computer, Inc., Mozilla Foundation, and
+ * Opera Software ASA. You are granted a license to use, reproduce and
  * create derivative works of this document."
  */
 
@@ -102,11 +102,11 @@ namespace HtmlParserSharp.Core
 		//protected char[] charBuffer;
         protected StringBuilder charBuffer;
 
-		protected int charBufferLen 
-        { 
+		protected int charBufferLen
+        {
             get {
                 return charBuffer.Length;
-            } 
+            }
         }
 
 		private bool quirks = false;
@@ -431,7 +431,7 @@ namespace HtmlParserSharp.Core
 										(systemIdentifier == null || "http://www.w3.org/TR/REC-html40/strict.dtd" == systemIdentifier))
 											|| ("-//W3C//DTD HTML 4.01//EN" == publicIdentifier &&
 												(systemIdentifier == null || "http://www.w3.org/TR/html4/strict.dtd" == systemIdentifier))
-											|| ("-//W3C//DTD XHTML 1.0 Strict//EN" == publicIdentifier && 
+											|| ("-//W3C//DTD XHTML 1.0 Strict//EN" == publicIdentifier &&
 													"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" == systemIdentifier)
 											|| ("-//W3C//DTD XHTML 1.1//EN" == publicIdentifier &&
 													"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" == systemIdentifier)
@@ -615,7 +615,7 @@ namespace HtmlParserSharp.Core
 						// ]NOCPP]
 
 						/*
-						 * 
+						 *
 						 * Then, switch to the root element mode of the tree
 						 * construction stage.
 						 */
@@ -872,7 +872,7 @@ namespace HtmlParserSharp.Core
 										}
 										// ]NOCPP]
 										/*
-										 * 
+										 *
 										 * Set the document to quirks mode.
 										 */
 										DocumentModeInternal(
@@ -921,7 +921,7 @@ namespace HtmlParserSharp.Core
 										mode = InsertionMode.IN_HEAD;
 										/*
 										 * then reprocess the current token.
-										 * 
+										 *
 										 * This will result in an empty head element
 										 * being generated, with the current token
 										 * being reprocessed in the "after head"
@@ -1163,7 +1163,7 @@ namespace HtmlParserSharp.Core
 				if (IsInForeign)
 				{
 					Err("End of file in a foreign namespace context.");
-					goto continueEofloop; // TODO: endless loop???
+                    goto breakEofloop;
 				}
 				switch (mode)
 				{
@@ -1191,7 +1191,7 @@ namespace HtmlParserSharp.Core
 						}
 						// ]NOCPP]
 						/*
-						 * 
+						 *
 						 * Set the document to quirks mode.
 						 */
 						DocumentModeInternal(DocumentMode.QuirksMode, null, null,
@@ -1324,9 +1324,6 @@ namespace HtmlParserSharp.Core
 						// ]NOCPP]
 						goto breakEofloop;
 				}
-
-			continueEofloop:
-				continue;
 			}
 
 		breakEofloop:
@@ -2269,7 +2266,7 @@ namespace HtmlParserSharp.Core
 									attributes = null; // CPP
 									goto breakStarttagloop;
 								case DispatchGroup.RT_OR_RP:
-		
+
 									eltPos = FindLastInScope("ruby");
 									if (eltPos != TreeBuilderConstants.NOT_FOUND_ON_STACK)
 									{
@@ -2741,7 +2738,7 @@ namespace HtmlParserSharp.Core
 						}
 						// ]NOCPP]
 						/*
-						 * 
+						 *
 						 * Set the document to quirks mode.
 						 */
 						DocumentModeInternal(DocumentMode.QuirksMode, null, null,
@@ -2806,12 +2803,12 @@ namespace HtmlParserSharp.Core
 							case DispatchGroup.HEAD:
 								/*
 								 * A start tag whose tag name is "head"
-								 * 
+								 *
 								 * Create an element for the token.
-								 * 
+								 *
 								 * Set the head element pointer to this new element
 								 * node.
-								 * 
+								 *
 								 * Append the new element to the current node and
 								 * push it onto the stack of open elements.
 								 */
@@ -2825,7 +2822,7 @@ namespace HtmlParserSharp.Core
 							default:
 								/*
 								 * Any other start tag token
-								 * 
+								 *
 								 * Act as if a start tag token with the tag name
 								 * "head" and no attributes had been seen,
 								 */
@@ -2833,7 +2830,7 @@ namespace HtmlParserSharp.Core
 								mode = InsertionMode.IN_HEAD;
 								/*
 								 * then reprocess the current token.
-								 * 
+								 *
 								 * This will result in an empty head element being
 								 * generated, with the current token being
 								 * reprocessed in the "after head" insertion mode.
@@ -3999,7 +3996,7 @@ namespace HtmlParserSharp.Core
 						}
 						// ]NOCPP]
 						/*
-						 * 
+						 *
 						 * Set the document to quirks mode.
 						 */
 						DocumentModeInternal(DocumentMode.QuirksMode, null, null,
@@ -4794,7 +4791,7 @@ namespace HtmlParserSharp.Core
 							node.name, clone, node.popName, node.attributes
 						// [NOCPP[
 							, node.Locator
-						// ]NOCPP]       
+						// ]NOCPP]
 					); // creation
 					// ownership
 					// goes
@@ -5667,7 +5664,7 @@ namespace HtmlParserSharp.Core
 
 		protected abstract void AppendCharacters(T parent, char[] buf,
 				int start, int length);
-        
+
         protected abstract void AppendCharacters(T parent, StringBuilder sb);
 
 		protected abstract void AppendIsindexPrompt(T parent);
@@ -5734,7 +5731,7 @@ namespace HtmlParserSharp.Core
 
 		/**
 		 * The argument MUST be an interned string or <code>null</code>.
-		 * 
+		 *
 		 * @param context
 		 */
 		public void SetFragmentContext([Local] string context)
@@ -5771,7 +5768,7 @@ namespace HtmlParserSharp.Core
 		}
 
 
-        private bool IsInForeignButNotHtmlOrMathTextIntegrationPoint 
+        private bool IsInForeignButNotHtmlOrMathTextIntegrationPoint
         {
             get {
                 if (currentPtr < 0) {
@@ -5782,7 +5779,7 @@ namespace HtmlParserSharp.Core
         }
 		/**
 		 * The argument MUST be an interned string or <code>null</code>.
-		 * 
+		 *
 		 * @param context
 		 */
 		public void SetFragmentContext([Local] string context,
@@ -6022,7 +6019,7 @@ namespace HtmlParserSharp.Core
 							null
 						// [NOCPP[
 							, node.Locator
-						// ]NOCPP]       
+						// ]NOCPP]
 					);
 					stack[i] = newNode;
 				}
