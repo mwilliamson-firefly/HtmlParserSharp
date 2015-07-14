@@ -2,6 +2,7 @@
 using System.Linq;
 using CsQuery;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 
 namespace HtmlParserSharp.Tests
 {
@@ -52,6 +53,11 @@ namespace HtmlParserSharp.Tests
             );
         }
 
-        
+        [TestMethod]
+        public void SvgHang()
+        {
+            var parser = new SimpleHtmlParser();
+            parser.Parse(new StringReader("<svg x=y/>"));
+        }
     }
 }
