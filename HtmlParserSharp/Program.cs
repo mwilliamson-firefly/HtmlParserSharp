@@ -57,12 +57,10 @@ namespace HtmlParserSharp
 			Console.Write("Parsing ... ");
 			var result = GetTestFiles().Select((file) =>
 				{
-					sw.Restart();
 					var doc = parser.Parse(file.FullName);
 					sw.Stop();
 					var parseTime = sw.Elapsed;
 					doc.Save("test.xml");
-					sw.Restart();
 					XDocument.Load("test.xml");
 					sw.Stop();
 					var reparseTime = sw.Elapsed;
